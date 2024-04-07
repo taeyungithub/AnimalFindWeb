@@ -49,7 +49,10 @@ export default function BoardCommentWrite() {
           });
 
             router.push("/boards")
+            // router.push(`/boards/${url}`);
+            // router.push(`/boards/${url}`);
             router.push(`/boards/${url}`);
+
         
       } catch (error) {
         alert(error.message)
