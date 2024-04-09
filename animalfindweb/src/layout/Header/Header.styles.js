@@ -23,12 +23,12 @@ export const InnerLogo = styled.div`
   font-weight: bold;
   font-family: "live";
   font-style: italic;
-  color: #5729ff;
+  color: blue;
   cursor: pointer;
 `;
 
 export const InnerButton = styled.span`
   margin: 10px;
-  color: #5729ff;
+  color: blue;
   cursor: pointer;
 `;

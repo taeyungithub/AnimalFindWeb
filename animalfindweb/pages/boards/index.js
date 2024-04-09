@@ -85,10 +85,10 @@ useEffect(() => {
       ))}
       <S.TableBottom />
       <S.Footer>
-        <S.Button onClick={onClickMoveToBoardNew}>
+        {/* <S.Button onClick={onClickMoveToBoardNew}>
           <S.PencilIcon src="/images/write.png" />
           게시물 등록하기
-        </S.Button>
+        </S.Button> */}
       </S.Footer>
     </S.Wrapper>
    );
