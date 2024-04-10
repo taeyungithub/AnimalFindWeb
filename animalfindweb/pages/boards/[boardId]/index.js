@@ -9,15 +9,20 @@ import BoardCommentList from "../../../src/boardcomment/list";
 import BoardCommentWrite from "../../../src/boardcomment/write";
 
 import { Tooltip } from "antd";
+import { getAuth } from "firebase/auth";
 
 export default function BoardDetailPage() {
   const router = useRouter()
   const [docData, setDocData] = useState("");
   const url = router.asPath.substring(8);
 
-  useEffect(()=>{
-  async function fetchData(){
-  console.log(url)
+  const auth = getAuth();
+  const user = auth.currentUser;
+  console.log(user)
+
+    useEffect(()=>{
+    async function fetchData(){
+    console.log(url)
 
     try{
       const docRef = doc(getFirestore(firebaseApp), "board", `${url}`);
