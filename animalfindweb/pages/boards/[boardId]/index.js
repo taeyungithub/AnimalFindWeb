@@ -11,6 +11,9 @@ import BoardCommentWrite from "../../../src/boardcomment/write";
 import { Tooltip } from "antd";
 import { getAuth } from "firebase/auth";
 
+import { myname, myuid } from "../../../src/stores";
+import {useRecoilState} from 'recoil'
+
 export default function BoardDetailPage() {
   const router = useRouter()
   const [docData, setDocData] = useState("");
@@ -19,6 +22,15 @@ export default function BoardDetailPage() {
   const auth = getAuth();
   const user = auth.currentUser;
   console.log(user)
+
+  const [userid, setUserid] = useRecoilState(myuid)
+  const [username, setUsername] = useRecoilState(myname)
+
+  console.log(userid)
+  console.log(username)
+
+
+
 
     useEffect(()=>{
     async function fetchData(){

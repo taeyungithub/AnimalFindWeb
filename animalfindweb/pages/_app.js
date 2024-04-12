@@ -2,6 +2,7 @@ import Layout from '../src/layout/index';
 import { globalStyles } from "../src/globalStyles";
 import { Global } from '@emotion/react';
 import { useRouter } from 'next/router';
+import { RecoilRoot } from 'recoil';
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -15,11 +16,13 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
+    <RecoilRoot>
       <Global styles={globalStyles} />
       {shouldRenderLayout && <Layout> {/* 레이아웃을 적용할 경우 */}
         <Component {...pageProps} />
       </Layout>}
       {!shouldRenderLayout && <Component {...pageProps} />} {/* 레이아웃을 제거할 경우 */}
+    </RecoilRoot>
     </>
   );
 }
