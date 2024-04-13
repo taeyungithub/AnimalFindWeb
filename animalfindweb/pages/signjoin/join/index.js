@@ -3,6 +3,7 @@ import firebaseApp from "../../../src/firebase";
 import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
+import { doc, getFirestore, setDoc } from "firebase/firestore/lite";
 
 
 const Wapper = styled.div`
@@ -46,6 +47,14 @@ export default function joinPage() {
     const user = userCredential.user;
     console.log(user)
     // ...
+
+     setDoc(doc(getFirestore(firebaseApp), "user", `${user.uid}`), {
+      displayName:displayName,
+      uid:user.uid
+     });
+
+
+
     alert("회원가입이 완료되었습니다.")
     router.push("/");
   })

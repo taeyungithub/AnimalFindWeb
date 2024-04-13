@@ -1,13 +1,17 @@
 import * as S from "../../styles/boardCommentList.styles";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import{collection,getFirestore,doc,getDocs, query, orderBy, deleteDoc} from'firebase/firestore/lite'
+import{collection,getFirestore,doc,getDocs, query, orderBy, deleteDoc, getDoc} from'firebase/firestore/lite'
 import { firebaseApp } from "../firebase";
+import Otherprofile from "../otherprofile";
 
 export default function BoardCommentList() {
 
     const router = useRouter();
     const [docData, setDocData] = useState([]);
+    const [uid, setuid] = useState()
+    const [uname, setuname] = useState();
+
 
     const url = router.asPath.substring(8);
     useEffect(() => {
@@ -51,16 +55,14 @@ export default function BoardCommentList() {
         }
     };
   
-
     
     return (
         <div>
-
-
           {docData?.map((el) => (
             <S.ItemWrapper>
               <S.FlexWrapper>
-                <S.Avatar src="/images/avatar.png" />
+                <S.Avatar src="/images/avatar.png"/>
+                <Otherprofile  uid={el?.uid}/>
                 <S.MainWrapper>
                   <S.WriterWrapper>
                     <S.Writer>{el?.writer}</S.Writer>

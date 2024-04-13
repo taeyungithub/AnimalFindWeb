@@ -40,7 +40,8 @@ export default function BoardCommentWrite() {
           rating: 0,
           createdAt:currentDate,
           timestamp: new Date(),
-          rating: star
+          rating: star,
+          uid:userid
           });
 
             router.push("/boards")
