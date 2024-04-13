@@ -77,7 +77,7 @@ export const ZipcodeWrapper = styled.div`
 `;
 
 export const Zipcode = styled.input`
-  width: 77px;
+  width: 95px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;

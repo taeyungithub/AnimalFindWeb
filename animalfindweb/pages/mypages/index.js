@@ -2,8 +2,36 @@
 import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
+import styled from "@emotion/styled";
 
+const Wapper = styled.div`
+  width: 1200px;
+  display: flex;
+  justify-content: flex-start;
+`
+const Profile = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+`
 
+const Img = styled.img`
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+`
+const Nickname =styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`
+
+const Email =styled.div`
+  font-size: 16px;
+  color: gray;
+`
 
 export default function MyPagesPage() {
   
@@ -44,13 +72,17 @@ export default function MyPagesPage() {
   }
 
   return (
-    <div>
-      displayName={displayName}<br />
-      email={email}<br />
-      photoURL={photoURL && <img src={photoURL} alt="Profile" />}<br />
-      uid={uid}<br />
-      <button onClick={onClicktomoveEdit}>수정하기</button>
-    </div>
+    <Wapper>
+      <Profile>
+            <Img src={photoURL} alt="프로필 사진" />
+            <div>
+                <Nickname >{displayName}</Nickname>
+                <Email >{email}</Email>
+            </div>
+      </Profile>
+
+      {/* <button onClick={onClicktomoveEdit}>수정하기</button> */}
+    </Wapper>
 
   );
 }

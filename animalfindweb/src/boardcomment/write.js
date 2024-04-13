@@ -2,24 +2,22 @@ import { useRouter } from "next/router";
 import * as S from "../../styles/boardCommentWrite.styles";
 import { useState } from "react";
 import { firebaseApp } from "../firebase";
-import{collection, addDoc, getDocs, getFirestore, query} from'firebase/firestore/lite'
-import { doc, setDoc } from "firebase/firestore/lite";
+import{getFirestore, doc, setDoc} from'firebase/firestore/lite'
+import { myname, myuid } from "../stores";
+import {useRecoilState} from 'recoil'
 
 
 export default function BoardCommentWrite() {
+    const [userid, setUserid] = useRecoilState(myuid)
+    const [username, setUsername] = useRecoilState(myname)
+
     const router = useRouter();
-    const [writer, setWriter] = useState("");
+    const [writer, setWriter] = useState(username);
     const [password, setPassword] = useState("");
     const [contents, setContents] = useState("");
     const [star, setStar] = useState(0)
 
-
     const url = router.asPath.substring(8);
-  console.log(url)
-
-    const onChangeWriter = (event) => {
-      setWriter(event.target.value);
-    };
   
     const onChangePassword = (event) => {
       setPassword(event.target.value);
@@ -35,13 +33,10 @@ export default function BoardCommentWrite() {
       const options = { timeZone: 'Asia/Seoul' };
       const currentDate = String(new Date().toLocaleDateString('ko-KR', options));
 
-        
-
         await setDoc(doc(getFirestore(firebaseApp), `${url}comment`, `${password}`), {
           writer:writer,
           contents:contents,
           password:password,
-          // _id: url,
           rating: 0,
           createdAt:currentDate,
           timestamp: new Date(),
@@ -67,8 +62,7 @@ export default function BoardCommentWrite() {
           </>
           <S.InputWrapper>
             <S.Input
-              placeholder="작성자"
-              onChange={onChangeWriter}
+              value={username} readOnly
             />
             <S.Input
               type="password"

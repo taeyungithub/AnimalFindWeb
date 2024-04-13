@@ -18,29 +18,17 @@ export default function BoardDetailPage() {
   const router = useRouter()
   const [docData, setDocData] = useState("");
   const url = router.asPath.substring(8);
-
-  const auth = getAuth();
-  const user = auth.currentUser;
-  console.log(user)
+  console.log(url)
 
   const [userid, setUserid] = useRecoilState(myuid)
   const [username, setUsername] = useRecoilState(myname)
 
-  console.log(userid)
-  console.log(username)
-
-
-
-
     useEffect(()=>{
     async function fetchData(){
-    console.log(url)
-
     try{
       const docRef = doc(getFirestore(firebaseApp), "board", `${url}`);
       const docSnap = await getDoc(docRef);
       setDocData(docSnap.data())
-      // console.log(docSnap)
 
     }catch (error){
       console.error(error)
@@ -50,36 +38,22 @@ export default function BoardDetailPage() {
 
   },[router])
 
-  // console.log(docData.data())
-
-  // const datata = docData.data()
-
-// Create a reference to the cities collection
-//   const docRef = collection(firebaseDb, "board");
-
-// // Create a query against the collection.
-//   const qqq = query(docRef, where("_id", "==", url));
-
-//   console.log(qqq)
-
-
 const onClickMoveToBoard = () => {
   router.push("/boards");
 };
 
 
 const onClickDelete = async () => {
-  try {
+  // 작성자만 삭제가능
+  if(userid === url.substring(0,28)){
     const firestore = getFirestore(firebaseApp);
     const docRef = doc(firestore, "board", url);
     await deleteDoc(docRef);
     alert("게시글이 삭제되었습니다.");
     router.push("/boards"); // 삭제 후에 목록 페이지로 이동
-    // router.push("https://www.naver.com/"); // 삭제 후에 목록 페이지로 이동
-
-
-  } catch (error) {
-    console.error("Error deleting document: ", error);
+  }
+  else{
+    alert("작성자만 삭제할수 있습니다.")
   }
 };
 

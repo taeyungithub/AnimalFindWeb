@@ -2,24 +2,30 @@ import * as S from "../../../styles/boardsNew";
 import {useState} from 'react'
 import {useRouter} from'next/router'
 import { firebaseApp } from "../../../src/firebase";
-import{collection, addDoc, getDocs, getFirestore, query} from'firebase/firestore/lite'
-import { doc, setDoc } from "firebase/firestore/lite";
+import{getFirestore, doc, setDoc } from'firebase/firestore/lite'
 import { getStorage,ref,uploadBytes,getDownloadURL } from "firebase/storage";
+import { myname, myuid } from "../../../src/stores";
+import {useRecoilState} from 'recoil'
 
 
 
 export default function BoardsNewPage() {
+  //recoil 이용 uid와 닉네임 가져오기
+  const [userid, setUserid] = useRecoilState(myuid)
+  const [username, setUsername] = useRecoilState(myname)
+
+  const router = useRouter()
+
+  // 제목 비밀번호 작성자 내용 다쓰면 등록하기 button ON
   const [isActive, setIsActive] = useState(false);
+  // 주소입력창 띄우기위해 필요
   const [isOpen, setIsOpen] = useState(false);
 
-
-  const [writer, setWriter] = useState("");
-  const [password, setPassword] = useState("");
+  const [writer, setWriter] = useState(username);
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
 
   const [writerError, setWriterError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
   const [contentsError, setContentsError] = useState("");
 
@@ -27,53 +33,11 @@ export default function BoardsNewPage() {
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
 
-  const router = useRouter()
-
   const [fileUrl1,setfileUrl1] = useState("")
   const [fileUrl2,setfileUrl2] = useState("")
   const [fileUrl3,setfileUrl3] = useState("")
 
-
-
-
-
- 
-  const onChangeWriter = (event) => {
-    setWriter(event.target.value);
-    if (event.target.value !== "") {
-      setWriterError("");
-    }
-
-    if (
-      event.target.value !== "" &&
-      password !== "" &&
-      title !== "" &&
-      contents !== ""
-    ) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-
-  const onChangePassword = (event)=> {
-    setPassword(event.target.value);
-    if (event.target.value !== "") {
-      setPasswordError("");
-    }
-
-    if (
-      writer !== "" &&
-      event.target.value !== "" &&
-      title !== "" &&
-      contents !== ""
-    ) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-
+// button ON
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
     if (event.target.value !== "") {
@@ -81,8 +45,6 @@ export default function BoardsNewPage() {
     }
 
     if (
-      writer !== "" &&
-      password !== "" &&
       event.target.value !== "" &&
       contents !== ""
     ) {
@@ -99,8 +61,6 @@ export default function BoardsNewPage() {
     }
 
     if (
-      writer !== "" &&
-      password !== "" &&
       title !== "" &&
       event.target.value !== ""
     ) {
@@ -131,12 +91,11 @@ export default function BoardsNewPage() {
     const storage = getStorage(firebaseApp);
 
     const uploaded_file = await uploadBytes(
-      ref(storage,`${random}/${event.target.files[0].name}`
+      ref(storage,`${userid+random}/${event.target.files[0].name}`
       ),event.target.files[0]
     );
 
     const file_url = await getDownloadURL(uploaded_file.ref);
-    console.log(file_url);
     setfileUrl1(file_url)
   
   }
@@ -146,12 +105,11 @@ export default function BoardsNewPage() {
     const storage = getStorage(firebaseApp);
 
     const uploaded_file = await uploadBytes(
-      ref(storage,`${random}/${event.target.files[0].name}`
+      ref(storage,`${userid+random}/${event.target.files[0].name}`
       ),event.target.files[0]
     );
 
     const file_url = await getDownloadURL(uploaded_file.ref);
-    console.log(file_url);
     setfileUrl2(file_url)
   
   }
@@ -161,22 +119,14 @@ export default function BoardsNewPage() {
     const storage = getStorage(firebaseApp);
 
     const uploaded_file = await uploadBytes(
-      ref(storage,`${random}/${event.target.files[0].name}`
+      ref(storage,`${userid+random}/${event.target.files[0].name}`
       ),event.target.files[0]
     );
 
     const file_url = await getDownloadURL(uploaded_file.ref);
-    console.log(file_url);
     setfileUrl3(file_url)
   
   }
-
-
-
-
-
-
-
 
 
   const random = Math.random()
@@ -187,9 +137,6 @@ export default function BoardsNewPage() {
     if (!writer) {
       setWriterError("작성자를 입력해주세요.");
     }
-    if (!password) {
-      setPasswordError("비밀번호를 입력해주세요.");
-    }
     if (!title) {
       setTitleError("제목을 입력해주세요.");
     }
@@ -197,20 +144,15 @@ export default function BoardsNewPage() {
       setContentsError("내용을 입력해주세요.");
     }
      
-     if (writer && password && title && contents){
+     if (writer && title && contents){
       alert("게시글이 등록되었습니다.");
       try{
         //서류봉투 중에서 board 봉투 가져오기
-      
-     
-    
-
-
-      await setDoc(doc(getFirestore(firebaseApp), "board", `${random}`), {
+      await setDoc(doc(getFirestore(firebaseApp), "board", `${userid+random}`), {
            writer:writer,
            title:title,
            contents:contents,
-           _id: random,
+           _id: userid+random,
            createdAt:currentDate,
            timestamp: new Date(),
             zipcode:zipcode,
@@ -221,77 +163,14 @@ export default function BoardsNewPage() {
             fileUrl3:fileUrl3
           });
         
+       router.push(`/boards/${userid+random}`)
 
-
-
-      //  const result = await getDocs(board)
-      //  const datas = result.docs.map(el => el.data())
-      //  const address = datas[0]._id
-        
-       router.push(`/boards/${random}`)
-
-
-
-      
       }catch(error){
         alert(error.message)
        }
       } 
-       
 
   };
-
-  // const onClickFetch = async () => {
-  //   const board =  collection(getFirestore(firebaseApp),"board")
-  //   const result = await getDocs(board)
-  //   const datas = result.docs.map(el => el.data())
-  //   console.log(datas[0].title)
-  // }
-
-// // 이미지 업로드
-// const onChangeUploadFB = async(event)=>{
-//   console.log(event.target.files[0]);
-
-//   const uploaded_file = await uploadBytes(
-//     ref(getStorage(firebaseApp),`images/${event.target.files[0].name}`
-//   //전 업로드 할 파일의 이름을 각 파일 이름으로 저장되게 했어요!
-//     ),event.target.files[0]
-//    );
-//    const file_url = await getDownloadURL(uploaded_file.ref);
-//    console.log(file_url);
-//    file_link_ref.current = {url: file_url};
-
-
-//   }
-
-
-// const onFileChange = (event) =>{
-//   console.log(event.target.files)
-//   const{
-//     target:{files}
-//   }=event;
-//   const theFile = files[0]
-//   const reader = new FileReader()
-// reader.onloadend = (finishedEvent)=>{
-//   console.log(finishedEvent);
-//   const{
-//     currentTarget:{result},
-//   }= finishedEvent;
-//   setAttachment(result)
-
-// }
-
-//   reader.readAsDataURL(theFile)
-// }
-
-
-
-
-
-
-
-
-
 
   return (
 <>
@@ -301,20 +180,15 @@ export default function BoardsNewPage() {
       </S.AddressModal>
     )}
 
-
     <S.Wrapper>
       <S.Title>게시글 등록</S.Title>
       <S.WriterWrapper>
         <S.InputWrapper>
           <S.Label>작성자</S.Label>
-          <S.Writer type="text" placeholder="이름을 적어주세요." onChange={onChangeWriter} />
+          <S.Writer type="text" value={username} readOnly/>
           <S.Error>{writerError}</S.Error>
         </S.InputWrapper>
-        <S.InputWrapper>
-          <S.Label>비밀번호</S.Label>
-          <S.Password type="password" placeholder="비밀번호를 작성해주세요." onChange={onChangePassword} />
-          <S.Error>{passwordError}</S.Error>
-        </S.InputWrapper>
+        
       </S.WriterWrapper>
       <S.InputWrapper>
         <S.Label>제목</S.Label>
@@ -332,9 +206,9 @@ export default function BoardsNewPage() {
           <S.Label>주소</S.Label>
           <S.ZipcodeWrapper>
             <S.Zipcode
-              placeholder="07250"
+              placeholder="도로명주소"
               readOnly
-              value={ zipcode  }
+              value={ zipcode }
             />
             <S.SearchButton onClick={onClickAddressSearch}>
               우편번호 검색

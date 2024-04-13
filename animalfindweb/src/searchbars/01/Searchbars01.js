@@ -43,7 +43,6 @@ export default function Searchbars01(props) {
   
   return (
     <Searchbar>
-      <FireFilledIcon />
       <SearchbarInput
         placeholder="동물의 종류만 검색 가능합니다." 
         onChange={onChangeSearchbar}
