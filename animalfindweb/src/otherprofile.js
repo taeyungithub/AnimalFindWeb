@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Modal } from 'antd';
-import { doc, getDoc, getFirestore } from 'firebase/firestore/lite';
-import { firebaseApp } from './firebase';
+import React, { useEffect, useState } from "react";
+import { Button, Modal } from "antd";
+import { doc, getDoc, getFirestore } from "firebase/firestore/lite";
+import { firebaseApp } from "./firebase";
+import { useRouter } from "next/router";
 
-
-export default function Otherprofile(props){
+export default function Otherprofile(props) {
   const [uname, setuname] = useState();
-
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -21,25 +20,34 @@ export default function Otherprofile(props){
 
   const onClickProfile = async (userId) => {
     //userid로 검색해서 프로필 따오기
-    try{
+    try {
       const a = doc(getFirestore(firebaseApp), "user", userId);
       const b = await getDoc(a);
-      setuname(b.data().displayName)
-    }catch (error){
-      console.error(error)
+      setuname(b.data().displayName);
+    } catch (error) {
+      console.error(error);
     }
-
-};
-
+  };
+  const router = useRouter();
+  const onClicktochat = () => {
+    router.push(`/boards`);
+  };
 
   return (
     <>
       <Button type="primary" onClick={showModal}>
-      프로필보기
+        프로필보기
       </Button>
-      <Modal title="프로필보기" onClick={onClickProfile(props.uid)} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Modal
+        title="프로필보기"
+        onClick={onClickProfile(props.uid)}
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
         <div>{props.uid}</div>
         <div>{uname}</div>
+        <button onClick={onClicktochat}>채팅하러가기</button>
       </Modal>
     </>
   );

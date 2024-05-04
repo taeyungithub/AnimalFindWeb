@@ -3,10 +3,11 @@ import { MenuItem, Wrapper } from "./nevigation.style";
 
 const NAVIGATION_MENUS = [
   { name: "게시물등록", page: "/boards/new" },
-    { name: "게시판", page: "/boards" },
-    { name: "물어보기", page: "/chatbot" },
-    { name: "마이페이지", page: "/mypages" },
-  ];
+  { name: "게시판", page: "/boards" },
+  { name: "물어보기", page: "/chatbot" },
+  { name: "채팅", page: "/chat" },
+  { name: "마이페이지", page: "/mypages" },
+];
 
 export default function LayoutNavigation() {
   const router = useRouter();
