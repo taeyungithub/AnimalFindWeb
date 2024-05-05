@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from "antd";
-import { doc, getDoc, getFirestore } from "firebase/firestore/lite";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore/lite";
 import { firebaseApp } from "./firebase";
 import { useRouter } from "next/router";
+import { myname, myuid } from "../src/stores";
+import { useRecoilState } from "recoil";
 
 export default function Otherprofile(props) {
   const [uname, setuname] = useState();
+  const [userid, setUserid] = useRecoilState(myuid);
+  const [username, setUsername] = useRecoilState(myname);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -28,9 +32,15 @@ export default function Otherprofile(props) {
       console.error(error);
     }
   };
+
   const router = useRouter();
-  const onClicktochat = () => {
-    router.push(`/boards`);
+  const onClicktochat = async () => {
+    // await setDoc(doc(getFirestore(firebaseApp), "chat", userid + username), {
+    //   writer: "gd",
+    //   userid: userid,
+    // });
+
+    router.push(`/chat`);
   };
 
   return (
@@ -47,8 +57,8 @@ export default function Otherprofile(props) {
       >
         <div>{props.uid}</div>
         <div>{uname}</div>
-        <button onClick={onClicktochat}>채팅하러가기</button>
       </Modal>
+      <button onClick={onClicktochat}>채팅하러가기</button>
     </>
   );
 }
