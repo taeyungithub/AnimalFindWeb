@@ -43,27 +43,6 @@ export default function ChatList() {
   }, []);
   console.log(docData);
 
-  const onClickDelete = async (password) => {
-    const inputPassword = prompt("비밀번호를 입력하세요.");
-
-    if (inputPassword === password) {
-      try {
-        const firestore = getFirestore(firebaseApp);
-        // 문서 제목을 비밀번호로 설정했으므로, doc 함수의 첫 번째 인자로 `${url}comment` 대신 password를 사용합니다.
-        const docRef = doc(firestore, `${url}comment`, password);
-        await deleteDoc(docRef);
-        setDocData((prevDocData) =>
-          prevDocData.filter((comment) => comment.password !== password)
-        ); // 이 부분이 삭제된 댓글을 상태에서 필터링하여 제거하는 부분입니다.
-        alert("댓글이 삭제되었습니다.");
-      } catch (error) {
-        console.error("Error deleting document: ", error);
-      }
-    } else {
-      alert("댓글작성자가 아니거나 비밀번호가 일치하지 않습니다.");
-    }
-  };
-
   return (
     <div>
       {docData?.map((el) => (
@@ -75,12 +54,6 @@ export default function ChatList() {
               </S.WriterWrapper>
               <S.Contents>{el?.contents}</S.Contents>
             </S.MainWrapper>
-            <S.OptionWrapper>
-              <S.DeleteIcon
-                src="/images/option_delete_icon.png/"
-                onClick={() => onClickDelete(el?.password)}
-              />
-            </S.OptionWrapper>
           </S.FlexWrapper>
           <S.DateString>{el?.createdAt}</S.DateString>
         </S.ItemWrapper>

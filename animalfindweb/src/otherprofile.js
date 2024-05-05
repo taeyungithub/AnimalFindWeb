@@ -57,8 +57,8 @@ export default function Otherprofile(props) {
       >
         <div>{props.uid}</div>
         <div>{uname}</div>
+        <button onClick={onClicktochat}>채팅하러가기</button>
       </Modal>
-      <button onClick={onClicktochat}>채팅하러가기</button>
     </>
   );
 }
