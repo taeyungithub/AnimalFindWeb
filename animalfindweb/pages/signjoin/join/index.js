@@ -73,7 +73,7 @@ const Button = styled.button`
   border-radius: 6px;
   background-color: skyblue;
   box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
-
+  cursor: pointer;
   :hover {
     background-color: #2193b0;
   }
@@ -117,7 +117,7 @@ export default function joinPage() {
           uid: user.uid,
         });
 
-        alert("회원가입이 완료되었습니다.");
+        alert("회원가입이 완료되었습니다!");
         router.push("/");
       })
       .catch((error) => {

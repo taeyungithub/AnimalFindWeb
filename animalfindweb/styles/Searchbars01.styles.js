@@ -3,23 +3,15 @@ import styled from "@emotion/styled";
 
 export const Searchbar = styled.div`
   width: 776px;
-  height: 52px;
+  height: 60px;
   border-radius: 15px;
-  background-color: #f5f2fc;
+  background-color: lightgray;
   padding: 0px 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
 
-export const FireFilledIcon = styled(FireFilled)`
-  color: #5729ff;
-  font-size: 30px;
-  cursor: pointer;
-
-  :hover {
-    color: red;
-  }
+  border: 1px solid black;
 `;
 
 export const SearchbarInput = styled.input`
@@ -29,4 +21,5 @@ export const SearchbarInput = styled.input`
   outline: none;
   background: none;
   margin: 0px 20px;
+  font-size: 20px;
 `;

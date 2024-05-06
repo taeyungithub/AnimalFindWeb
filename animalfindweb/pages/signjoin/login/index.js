@@ -75,7 +75,7 @@ const Button = styled.button`
   border-radius: 6px;
   background-color: skyblue;
   box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
-
+  cursor: pointer;
   :hover {
     background-color: #2193b0;
   }
@@ -120,7 +120,7 @@ export default function LoginPage() {
         console.log(userid);
         console.log(username);
 
-        alert("로그인완료");
+        alert("로그인이 완료되었습니다!");
         router.push("/boards");
       })
       .catch((error) => {

@@ -9,8 +9,7 @@ const Body = styled.div`
   align-items: center;
 `;
 
-
-export default function Layout(props){
+export default function Layout(props) {
   return (
     <>
       <LayoutHeader />
