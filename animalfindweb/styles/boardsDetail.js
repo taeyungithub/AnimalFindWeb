@@ -88,8 +88,6 @@ export const IconWrapper = styled.div`
   text-align: center;
 `;
 
-
-
 export const LikeWrapper = styled.div`
   padding-top: 160px;
   display: flex;
@@ -123,7 +121,6 @@ export const DislikeCount = styled.div`
 
 export const LinkIcon = styled.img``;
 
-
 export const ImageWrapper = styled.div`
   margin-top: 50px;
   display: flex;
@@ -132,9 +129,9 @@ export const ImageWrapper = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 50%;
+  width: 30%;
   height: auto;
-  margin-left:15px;
-  margin-right:15px;
+  margin-left: 15px;
+  margin-right: 15px;
   margin-bottom: 30px;
 `;

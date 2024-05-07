@@ -120,10 +120,10 @@ export default function LoginPage() {
         console.log(userid);
         console.log(username);
 
-        alert("로그인이 완료되었습니다!");
         router.push("/boards");
       })
       .catch((error) => {
+        alert("다시 입력해주세요!");
         const errorCode = error.code;
         const errorMessage = error.message;
       });

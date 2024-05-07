@@ -121,6 +121,7 @@ export default function joinPage() {
         router.push("/");
       })
       .catch((error) => {
+        alert("다시 입력해주세요!");
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
@@ -140,6 +141,10 @@ export default function joinPage() {
       });
   };
 
+  const onClickBack = () => {
+    router.push("/");
+  };
+
   return (
     <Wapper>
       <Border>
@@ -150,12 +155,12 @@ export default function joinPage() {
           <Input
             type="text"
             onChange={onChangeEmail}
-            placeholder="Email를 입력해주세요"
+            placeholder="ID : Email를 입력해주세요"
           ></Input>
           <Input
             type="password"
             onChange={onChangePassword}
-            placeholder="Password를 입력해주세요"
+            placeholder="Password : 8자이상 입력해주세요"
           ></Input>
           <Input
             type="text"
@@ -164,6 +169,7 @@ export default function joinPage() {
           ></Input>
         </Body>
         <Footer>
+          <Button onClick={onClickBack}>뒤로가기</Button>
           <Button onClick={() => joinUp({ email: email, password: password })}>
             Signup
           </Button>

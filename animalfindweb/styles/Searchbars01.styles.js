@@ -2,7 +2,7 @@ import { FireFilled } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
 export const Searchbar = styled.div`
-  width: 776px;
+  width: 1000px;
   height: 60px;
   border-radius: 15px;
   background-color: lightgray;

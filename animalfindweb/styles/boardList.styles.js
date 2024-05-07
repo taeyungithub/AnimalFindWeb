@@ -1,10 +1,5 @@
 import styled from "@emotion/styled";
 
-export const Wrapper = styled.div`
-  width: 1200px;
-  margin: 100px;
-`;
-
 export const TableTop = styled.div`
   border-top: 2px solid gray;
   margin-top: 20px;
@@ -14,41 +9,91 @@ export const TableBottom = styled.div`
   border-bottom: 2px solid gray;
 `;
 
-export const Row = styled.div`
+export const Wrapper = styled.div`
+  width: 1200px;
+  margin-top: 20px;
+  margin-left: 100px;
+  margin-right: 100px;
+  padding: 20px;
+
   display: flex;
   flex-direction: row;
-  height: 52px;
-  line-height: 52px;
-  border-bottom: 1px solid gray;
-
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
 `;
 
-export const ColumnHeaderBasic = styled.div`
-  width: 10%;
-  text-align: center;
-`;
+export const Row = styled.div`
+  margin-top: 20px;
+  width: calc(25% - 7px);
+  aspect-ratio: 6 / 5;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 15px;
 
-export const ColumnHeaderTitle = styled.div`
-  width: 70%;
-  text-align: center;
-`;
-
-export const ColumnBasic = styled.div`
-  width: 10%;
-  text-align: center;
-  :hover {
-    color: blue;
+  &:after {
+    content: "";
+    display: block;
+    background: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
   }
+
+  &:hover::after {
+    opacity: 1;
+  }
+
+  &:hover Img {
+    transform: scale(1.1);
+    filter: blur(3px);
+  }
+
+  &:hover div {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+export const ImgBox = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+export const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease-in-out, filter 0.4s ease-in-out;
+`;
+
+export const textBox = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 20px;
+  z-index: 3;
 `;
 
 export const ColumnTitle = styled.div`
-  width: 70%;
-  text-align: center;
-  cursor: pointer;
+  color: white;
+  margin: 5px 0 0;
+  font-size: 28px;
+  font-weight: 700;
+  transform: translateY(50px);
 
-  :hover {
-    color: blue;
-  }
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
 `;
 
 export const Footer = styled.div`
@@ -56,22 +101,4 @@ export const Footer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding-top: 50px;
-`;
-
-export const PencilIcon = styled.img``;
-
-export const Button = styled.button`
-  width: 171px;
-  height: 52px;
-  background-color: white;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  cursor: pointer;
-
-  :hover {
-    background-color: yellow;
-  }
 `;
