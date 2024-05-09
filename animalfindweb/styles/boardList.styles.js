@@ -89,9 +89,9 @@ export const textBox = styled.div`
 export const ColumnTitle = styled.div`
   color: white;
   margin: 5px 0 0;
-  font-size: 28px;
+  font-size: 23px;
   font-weight: 700;
-  transform: translateY(50px);
+  transform: translateY(70px);
 
   transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
 `;

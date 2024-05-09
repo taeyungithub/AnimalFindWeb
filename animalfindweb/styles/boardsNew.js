@@ -3,24 +3,23 @@ import { Modal } from "antd";
 import DaumPostcode from "react-daum-postcode";
 
 export const Wrapper = styled.div`
-  width: 1200px;
+  width: 1000px;
   /* height: 1847px; */
   border: 1px solid black;
   margin: 100px;
-  padding-top: 80px;
-  padding-bottom: 100px;
-  padding-left: 102px;
-  padding-right: 102px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  border: none;
-  box-shadow: 0px 0px 10px gray;
+  border: 4px solid black;
+  border-radius: 6px;
+  box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
 `;
 
 export const Title = styled.div`
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 36px;
+  font-size: 30px;
   font-weight: bold;
 `;
 
@@ -29,46 +28,43 @@ export const WriterWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 40px;
+  padding-top: 20px;
 `;
 
 export const Writer = styled.input`
-  width: 486px;
+  width: 480px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
-`;
-
-export const Password = styled.input`
-  width: 486px;
-  height: 52px;
-  padding-left: 16px;
-  border: 1px solid #bdbdbd;
+  border-radius: 6px;
 `;
 
 export const Label = styled.div`
   padding-bottom: 16px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: bold;
+  border-radius: 6px;
 `;
 
 export const InputWrapper = styled.div`
-  padding-top: 40px;
+  padding-top: 20px;
 `;
 
 export const Subject = styled.input`
-  width: 996px;
+  width: 480px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
+  border-radius: 6px;
 `;
 
 export const Contents = styled.textarea`
-  width: 996px;
-  height: 480px;
+  width: 900px;
+  height: 200px;
   padding-left: 16px;
   padding: 14px;
   border: 1px solid #bdbdbd;
+  border-radius: 6px;
 `;
 
 export const ZipcodeWrapper = styled.div`
@@ -81,6 +77,7 @@ export const Zipcode = styled.input`
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
+  border-radius: 6px;
 `;
 
 export const SearchButton = styled.button`
@@ -90,14 +87,16 @@ export const SearchButton = styled.button`
   background-color: black;
   cursor: pointer;
   color: white;
+  border-radius: 6px;
 `;
 
 export const Address = styled.input`
-  width: 996px;
+  width: 900px;
   height: 52px;
   margin-top: 16px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
+  border-radius: 6px;
 `;
 
 export const Youtube = styled.input`
@@ -108,11 +107,14 @@ export const Youtube = styled.input`
 `;
 
 export const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
   width: 996px;
   padding-top: 40px;
 `;
 
-export const UploadButton = styled.button`
+export const UploadButton = styled.input`
   width: 78px;
   height: 78px;
   background-color: #bdbdbd;
@@ -120,6 +122,7 @@ export const UploadButton = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  opacity: 1;
 `;
 
 export const OptionWrapper = styled.div`
@@ -166,9 +169,8 @@ export const SubmitButton = styled.button`
   margin-left: 12px;
   margin-right: 12px;
   cursor: pointer;
-
-  background-color: ${(props) =>
-    props.isActive ? "yellow" : "none"};
+  border-radius: 6px;
+  background-color: ${(props) => (props.isActive ? "yellow" : "none")};
 `;
 
 export const Error = styled.div`
