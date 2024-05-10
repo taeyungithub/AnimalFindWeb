@@ -5,6 +5,32 @@ import { firebaseApp } from "../firebase";
 import { getFirestore, doc, setDoc } from "firebase/firestore/lite";
 import { myname, myuid } from "../stores";
 import { useRecoilState } from "recoil";
+import { getDatabase, ref, set, child, push } from "firebase/database";
+import styled from "@emotion/styled";
+
+const Wapper = styled.div`
+  width: 100%;
+  height: 500px;
+
+  display: flex;
+  flex-direction: column; /* 아이템들을 세로 방향으로 정렬 */
+  justify-content: center; /* 아이템들을 가운데 정렬 */
+  align-items: center; /* 아이템들을 세로 방향으로 가운데 정렬 */
+`;
+
+const Border = styled.div`
+  width: 1000px;
+  height: 200px;
+  padding: 10px;
+  border: 4px solid black;
+  border-radius: 6px;
+  box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
+  overflow: auto; /* 내용이 넘치는 경우 스크롤 표시 */
+
+  display: flex;
+  flex-direction: column; /* 아이템들을 세로 방향으로 정렬 */
+  margin-bottom: 40px;
+`;
 
 export default function ChatWrite() {
   const [userid, setUserid] = useRecoilState(myuid);
@@ -12,75 +38,38 @@ export default function ChatWrite() {
 
   const router = useRouter();
   const [writer, setWriter] = useState(username);
-  const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
-  const [star, setStar] = useState(0);
 
   const url = router.asPath.substring(8);
-
-  const onChangePassword = (event) => {
-    setPassword(event.target.value);
-  };
 
   const onChangeContents = (event) => {
     setContents(event.target.value);
   };
 
   const onClickWrite = async () => {
-    try {
-      //현재 날짜
-      const options = { timeZone: "Asia/Seoul" };
-      const currentDate = String(
-        new Date().toLocaleDateString("ko-KR", options)
-      );
-
-      await setDoc(
-        doc(getFirestore(firebaseApp), `${url}chat`, `${password}`),
-        {
-          writer: writer,
-          contents: contents,
-          password: password,
-          rating: 0,
-          createdAt: currentDate,
-          timestamp: new Date(),
-          rating: star,
-          uid: userid,
-        }
-      );
-
-      router.push("/chat");
-      router.push("/chat");
-    } catch (error) {
-      alert(error.message);
-    }
+    const db = getDatabase(firebaseApp);
+    const chatRef = child(ref(db), url);
+    await push(chatRef, {
+      writer: writer,
+      contents: contents,
+    });
+    setContents(""); // 메시지 보낸 후 입력창 초기화
   };
 
   return (
-    <S.Wrapper>
-      <>
-        <span>댓글</span>
-        <S.PencilIcon src="/images/pencil.png" />
-      </>
-      <S.InputWrapper>
-        <S.Input value={username} readOnly />
-        <S.Input
-          type="password"
-          placeholder="비밀번호"
-          onChange={onChangePassword}
-        />
-        <S.Star onChange={setStar} />
-      </S.InputWrapper>
-      <S.ContentsWrapper>
+    <Wapper>
+      <Border>
         <S.Contents
+          value={contents}
           maxLength={100}
           onChange={onChangeContents}
           placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
         />
         <S.BottomWrapper>
           <S.ContentsLength>{contents.length}/100</S.ContentsLength>
-          <S.Button onClick={onClickWrite}>등록하기</S.Button>
+          <S.Button onClick={onClickWrite}>전송하기</S.Button>
         </S.BottomWrapper>
-      </S.ContentsWrapper>
-    </S.Wrapper>
+      </Border>
+    </Wapper>
   );
 }

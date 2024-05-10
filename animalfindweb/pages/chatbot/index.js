@@ -34,6 +34,7 @@ const ChatDiv = styled.div`
   padding: 10px;
   overflow-y: auto; /* 채팅창이 넘칠 경우 스크롤바가 나타나도록 설정 */
   width: 100%;
+  background-color: lightsteelblue;
 `;
 
 const Message = styled.div`
