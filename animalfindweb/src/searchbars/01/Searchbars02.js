@@ -21,6 +21,27 @@ import { firebaseApp } from "../../firebase";
 
 import { myname, myuid } from "../../stores";
 import { useRecoilState } from "recoil";
+import styled from "@emotion/styled";
+
+const Button = styled.button`
+  width: 100px;
+  height: 48px;
+  padding: 0 10px;
+  border-radius: 6px;
+  background-color: white;
+  box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
+  cursor: pointer;
+  :hover {
+    background-color: gray;
+  }
+  :active {
+    color: white;
+    box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
+    position: relative;
+    top: 2px;
+    background-color: gray;
+  }
+`;
 
 export default function Searchbars01(props) {
   const [userid, setUserid] = useRecoilState(myuid);
@@ -49,7 +70,7 @@ export default function Searchbars01(props) {
         placeholder="채팅하고싶은 유저의 아이디를 입력하세요"
         onChange={onChangeSearchbar}
       />
-      <button onClick={onClickButton}>추가</button>
+      <Button onClick={onClickButton}>추가</Button>
     </Searchbar>
   );
 }

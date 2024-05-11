@@ -19,41 +19,21 @@ import { useRecoilState } from "recoil";
 import Searchbars02 from "../../src/searchbars/01/Searchbars02";
 
 const Wapper = styled.div`
-  width: 1800px;
-  display: flex;
-  justify-content: flex-start;
-`;
-const Profile = styled.div`
-  width: 400px;
+  width: 1200px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 20px;
-`;
-
-const Img = styled.img`
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-right: 20px;
-`;
-const Nickname = styled.div`
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-`;
-
-const Email = styled.div`
-  font-size: 16px;
-  color: gray;
 `;
 
 const Board = styled.div`
   width: 1200px;
   margin: 100px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border: 4px solid black;
+  border-radius: 6px;
+  box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
 `;
 
 export const Row = styled.div`
@@ -69,7 +49,7 @@ export const ColumnHeaderBasic = styled.div`
 `;
 
 export const ColumnHeaderTitle = styled.div`
-  width: 70%;
+  width: 100%;
   text-align: center;
 `;
 
@@ -82,7 +62,7 @@ export const ColumnBasic = styled.div`
 `;
 
 export const ColumnTitle = styled.div`
-  width: 70%;
+  width: 100%;
   text-align: center;
   cursor: pointer;
 

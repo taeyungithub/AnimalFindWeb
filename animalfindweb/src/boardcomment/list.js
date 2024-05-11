@@ -74,7 +74,6 @@ export default function BoardCommentList() {
             <S.MainWrapper>
               <S.WriterWrapper>
                 <S.Writer>{el?.writer}</S.Writer>
-                <S.Star value={el.rating} disabled />
               </S.WriterWrapper>
               <S.Contents>{el?.contents}</S.Contents>
             </S.MainWrapper>

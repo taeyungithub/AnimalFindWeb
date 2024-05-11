@@ -3,21 +3,21 @@ import { LikeOutlined, DislikeOutlined } from "@ant-design/icons";
 import ReactPlayer from "react-player";
 
 export const Wrapper = styled.div`
-  width: 1200px;
+  width: 1000px;
   margin: 100px;
 `;
 
 export const CardWrapper = styled.div`
   border: 1px solid black;
   padding-top: 80px;
-  padding-bottom: 100px;
   padding-left: 102px;
   padding-right: 102px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: none;
-  box-shadow: 0px 0px 10px gray;
+  border: 4px solid black;
+  border-radius: 6px;
+  box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
 `;
 
 export const Header = styled.div`
@@ -45,13 +45,16 @@ export const Info = styled.div`
   justify-content: center;
 `;
 
-export const Writer = styled.div``;
+export const Writer = styled.div`
+  font-weight: 500;
+  font-size: 20px;
+`;
 
 export const CreatedAt = styled.div``;
 
 export const Body = styled.div`
   width: 100%;
-  min-height: 800px;
+  min-height: 670px;
 `;
 
 export const Title = styled.h1`
@@ -60,7 +63,7 @@ export const Title = styled.h1`
 
 export const Contents = styled.div`
   padding-top: 40px;
-  padding-bottom: 120px;
+  padding-bottom: 40px;
 `;
 
 export const BottomWrapper = styled.div`
@@ -71,16 +74,22 @@ export const BottomWrapper = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 179px;
-  height: 45px;
-  background-color: white;
-  border: 1px solid gray;
-  margin: 0px 12px;
+  width: 200px;
+  height: 48px;
+  padding: 0 10px;
+  border-radius: 6px;
+  background-color: lightyellow;
+  box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
+  margin-right: 60px;
   cursor: pointer;
-
   :hover {
-    background-color: gold;
-    border-color: white;
+    background-color: yellow;
+  }
+  :active {
+    color: black;
+    box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
+    position: relative;
+    top: 2px;
   }
 `;
 

@@ -68,7 +68,6 @@ export default function BoardDetailPage() {
               </S.AvatarWrapper>
 
               <S.IconWrapper>
-                <S.LinkIcon src="/images/link.png" />
                 <Tooltip
                   placement="topRight"
                   title={`${docData.address ?? ""} ${
