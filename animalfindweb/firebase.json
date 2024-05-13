@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "site": "animalweb-81a2f",
+    "public": "build",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
