@@ -67,7 +67,7 @@ export default function Searchbars01(props) {
   return (
     <Searchbar>
       <SearchbarInput
-        placeholder="채팅하고싶은 유저의 아이디를 입력하세요"
+        placeholder="채팅하고 싶은 사용자의 아이디를 입력하세요"
         onChange={onChangeSearchbar}
       />
       <Button onClick={onClickButton}>추가</Button>
