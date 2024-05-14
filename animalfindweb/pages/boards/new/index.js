@@ -116,7 +116,7 @@ export default function BoardsNewPage() {
     setfileUrl3(file_url);
   };
 
-  const random = Math.random();
+  const random = Math.floor(Math.random() * 100000000000);
   const options = { timeZone: "Asia/Seoul" };
   const currentDate = String(new Date().toLocaleDateString("ko-KR", options));
 

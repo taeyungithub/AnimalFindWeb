@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState, useRef } from "react";
 import { firebaseApp } from "../firebase";
-import { getDatabase, ref, child, onValue } from "firebase/database";
 import styled from "@emotion/styled";
+import { getDatabase, ref, child, onValue } from "firebase/database";
 import { myname, myuid } from "../../src/stores";
 import { useRecoilState } from "recoil";
 

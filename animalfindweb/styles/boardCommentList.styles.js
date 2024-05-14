@@ -24,6 +24,8 @@ export const MainWrapper = styled.div`
   padding-left: 10px;
 `;
 export const WriterWrapper = styled.div`
+  font-size: 20px;
+  font-weight: 500px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -44,6 +46,7 @@ export const UpdateIcon = styled.img`
   cursor: pointer;
 `;
 export const DeleteIcon = styled.img`
+  margin-left: 30px;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -64,4 +67,10 @@ export const PasswordModal = styled(Modal)``;
 export const PasswordInput = styled.input`
   width: 100%;
   margin-top: 10px;
+`;
+
+export const profile = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 `;
