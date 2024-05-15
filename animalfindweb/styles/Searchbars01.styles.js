@@ -23,3 +23,12 @@ export const SearchbarInput = styled.input`
   margin: 0px 20px;
   font-size: 20px;
 `;
+export const SearchbarInput2 = styled.input`
+  width: 70%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: none;
+  margin: 0px 20px;
+  font-size: 20px;
+`;

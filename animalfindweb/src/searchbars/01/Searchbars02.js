@@ -3,6 +3,7 @@ import {
   FireFilledIcon,
   Searchbar,
   SearchbarInput,
+  SearchbarInput2,
 } from "../../../styles/Searchbars01.styles";
 import _ from "lodash";
 import {
@@ -22,6 +23,7 @@ import { firebaseApp } from "../../firebase";
 import { myname, myuid } from "../../stores";
 import { useRecoilState } from "recoil";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 
 const Button = styled.button`
   width: 100px;
@@ -47,17 +49,25 @@ export default function Searchbars01(props) {
   const [userid, setUserid] = useRecoilState(myuid);
   const [username, setUsername] = useRecoilState(myname);
   const [keyword, setKeyword] = useState("");
+  const [room, setRoom] = useState("");
+  const router = useRouter();
 
   const onChangeKeyword = async () => {
-    await setDoc(doc(getFirestore(firebaseApp), "chat", userid + keyword), {
+    await setDoc(doc(getFirestore(firebaseApp), "chat", room), {
       writer1: userid,
       writer2: keyword,
-      _id: userid + keyword,
+      _id: room,
+      room: room,
     });
+    router.push(`/boards`);
+    router.push(`/chat`);
   };
 
   const onChangeSearchbar = (event) => {
     setKeyword(event.target.value);
+  };
+  const onChangeRoom = (event) => {
+    setRoom(event.target.value);
   };
 
   const onClickButton = () => {
@@ -66,6 +76,11 @@ export default function Searchbars01(props) {
 
   return (
     <Searchbar>
+      <SearchbarInput2
+        placeholder="새 채팅방의 이름을 입력하세요"
+        onChange={onChangeRoom}
+      />
+      <div>|</div>
       <SearchbarInput
         placeholder="채팅하고 싶은 사용자의 아이디를 입력하세요"
         onChange={onChangeSearchbar}

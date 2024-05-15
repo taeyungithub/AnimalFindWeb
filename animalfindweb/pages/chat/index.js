@@ -145,7 +145,7 @@ export default function MyPagesPage() {
         {docData?.map((el) => (
           <Row key={el._id}>
             <ColumnTitle id={el._id} onClick={onClickMoveToBoardDetail}>
-              {el.writer2}
+              {el.room}
             </ColumnTitle>
           </Row>
         ))}

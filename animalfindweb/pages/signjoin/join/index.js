@@ -109,12 +109,11 @@ export default function joinPage() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
-        // ...
 
         setDoc(doc(getFirestore(firebaseApp), "user", `${user.uid}`), {
           displayName: displayName,
           uid: user.uid,
+          contents: "",
         });
 
         alert("회원가입이 완료되었습니다!");

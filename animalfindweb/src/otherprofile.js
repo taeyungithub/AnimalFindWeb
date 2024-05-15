@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Modal } from "antd";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore/lite";
+import { doc, getDoc, getFirestore } from "firebase/firestore/lite";
 import { firebaseApp } from "./firebase";
 import { useRouter } from "next/router";
 import { myname, myuid } from "../src/stores";
@@ -10,6 +10,9 @@ export default function Otherprofile(props) {
   const [uname, setuname] = useState();
   const [userid, setUserid] = useRecoilState(myuid);
   const [username, setUsername] = useRecoilState(myname);
+  const [ucontents, setcontents] = useState();
+
+  const router = useRouter();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -28,18 +31,13 @@ export default function Otherprofile(props) {
       const a = doc(getFirestore(firebaseApp), "user", userId);
       const b = await getDoc(a);
       setuname(b.data().displayName);
+      setcontents(b.data().contents);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const router = useRouter();
   const onClicktochat = async () => {
-    // await setDoc(doc(getFirestore(firebaseApp), "chat", userid + username), {
-    //   writer: "gd",
-    //   userid: userid,
-    // });
-
     router.push(`/chat`);
   };
 
@@ -55,8 +53,11 @@ export default function Otherprofile(props) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <div>{props.uid}</div>
-        <div>{uname}</div>
+        <div>닉네임 : {uname}</div>
+        <div>사용자 아이디 : {props.uid}</div>
+        <div>사용자 소개 : {ucontents}</div>
+        <br></br>
+        <div>채팅을 원할시 사용자 아이디를 복사해주세요!</div>
         <button onClick={onClicktochat}>채팅하러가기</button>
       </Modal>
     </>

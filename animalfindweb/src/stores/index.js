@@ -1,11 +1,11 @@
-import {atom} from 'recoil'
+import { atom } from "recoil";
 
 export const myuid = atom({
-    key:"myuid",
-    default:""
-})
+  key: "myuid",
+  default: "",
+});
 
 export const myname = atom({
-    key:"myname",
-    default:""
-})
+  key: "myname",
+  default: "",
+});
