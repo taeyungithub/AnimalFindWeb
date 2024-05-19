@@ -8,6 +8,7 @@ import {
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { doc, getFirestore, setDoc } from "firebase/firestore/lite";
+import Checkbox1 from "../../../src/checkbox1";
 
 const Wapper = styled.div`
   width: 100%;
@@ -85,12 +86,23 @@ const Button = styled.button`
   }
 `;
 
+const Check = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+`;
+const Agree = styled.span`
+  margin-left: 25px;
+  margin-right: 10px;
+`;
+
 export default function joinPage() {
   const auth = getAuth(firebaseApp);
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const [agree, setAgree] = useState(false);
 
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -102,6 +114,9 @@ export default function joinPage() {
 
   const onChangedisplayName = (event) => {
     setDisplayName(event.target.value);
+  };
+  const onCheckAgree = (event) => {
+    setAgree(event.target.checked);
   };
 
   const joinUp = async ({ email, password }) => {
@@ -166,10 +181,20 @@ export default function joinPage() {
             onChange={onChangedisplayName}
             placeholder="닉네임"
           ></Input>
+          <Check>
+            <Checkbox1></Checkbox1>
+            <div>
+              <Agree>동의하십니까?</Agree>
+              <input type="checkbox" onChange={onCheckAgree}></input>
+            </div>
+          </Check>
         </Body>
         <Footer>
           <Button onClick={onClickBack}>뒤로가기</Button>
-          <Button onClick={() => joinUp({ email: email, password: password })}>
+          <Button
+            onClick={() => joinUp({ email: email, password: password })}
+            disabled={!agree}
+          >
             Signup
           </Button>
         </Footer>
