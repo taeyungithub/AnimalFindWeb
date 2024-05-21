@@ -7,14 +7,12 @@ import { firebaseApp } from "../../src/firebase";
 import {
   collection,
   getFirestore,
-  doc,
   getDocs,
   query,
-  orderBy,
   where,
   or,
 } from "firebase/firestore/lite";
-import { myname, myuid } from "../../src/stores";
+import { myuid } from "../../src/stores";
 import { useRecoilState } from "recoil";
 import Searchbars02 from "../../src/searchbars/01/Searchbars02";
 
@@ -73,16 +71,11 @@ export const ColumnTitle = styled.div`
 
 export default function MyPagesPage() {
   const [userid, setUserid] = useRecoilState(myuid);
-
-  const [username, setUsername] = useRecoilState(myname);
-
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [uid, setUid] = useState("");
-
   const [docData, setDocData] = useState([]);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -123,11 +116,8 @@ export default function MyPagesPage() {
           newData.push(doc.data()); // 새로운 데이터를 배열에 추가
         });
         setDocData(newData); // 새로운 데이터로 상태 설정
-      } catch (error) {
-        console.error("Error fetching documents: ", error);
-      }
+      } catch (error) {}
     }
-    console.log(docData);
     fetchData1();
   }, []);
 

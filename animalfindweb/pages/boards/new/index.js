@@ -30,14 +30,14 @@ export default function BoardsNewPage() {
 
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
-  const [addressDetail, setAddressDetail] = useState("");
 
   const [fileUrl1, setfileUrl1] = useState("");
   const [fileUrl2, setfileUrl2] = useState("");
   const [fileUrl3, setfileUrl3] = useState("");
 
-  // button ON
+  // 등록하기 button ON
   const onChangeTitle = (event) => {
+    // 제목값을 input값으로 변경
     setTitle(event.target.value);
     if (event.target.value !== "") {
       setTitleError("");
@@ -63,10 +63,6 @@ export default function BoardsNewPage() {
     }
   };
 
-  const onChangeAddressDetail = (event) => {
-    setAddressDetail(event.target.value);
-  };
-
   const onClickAddressSearch = () => {
     setIsOpen((prev) => !prev);
   };
@@ -76,7 +72,7 @@ export default function BoardsNewPage() {
     setZipcode(data.zonecode);
     setIsOpen((prev) => !prev);
   };
-
+  // 사진 이미지를 파이어베이스 클라우드 스토리지에 url로 저장
   const onFileChange1 = async (event) => {
     console.log(event.target.files[0]);
     const storage = getStorage(firebaseApp);
@@ -134,7 +130,7 @@ export default function BoardsNewPage() {
     if (writer && title && contents) {
       alert("게시글이 등록되었습니다.");
       try {
-        //서류봉투 중에서 board 봉투 가져오기
+        // board에 저장하기
         await setDoc(
           doc(getFirestore(firebaseApp), "board", `${userid + random}`),
           {
@@ -146,13 +142,11 @@ export default function BoardsNewPage() {
             timestamp: new Date(),
             zipcode: zipcode,
             address: address,
-            addressDetail: addressDetail,
             fileUrl1: fileUrl1,
             fileUrl2: fileUrl2,
             fileUrl3: fileUrl3,
           }
         );
-
         router.push(`/boards/${userid + random}`);
       } catch (error) {
         alert(error.message);

@@ -1,27 +1,19 @@
 import { useRouter } from "next/router";
-
 import * as S from "../../../styles/boardsDetail";
 import { firebaseApp } from "../../../src/firebase";
 import { getFirestore, doc, getDoc, deleteDoc } from "firebase/firestore/lite";
 import { useEffect, useState } from "react";
-
 import BoardCommentList from "../../../src/boardcomment/list";
 import BoardCommentWrite from "../../../src/boardcomment/write";
-
 import { Tooltip } from "antd";
-import { getAuth } from "firebase/auth";
-
-import { myname, myuid } from "../../../src/stores";
+import { myuid } from "../../../src/stores";
 import { useRecoilState } from "recoil";
 
 export default function BoardDetailPage() {
   const router = useRouter();
   const [docData, setDocData] = useState("");
   const url = router.asPath.substring(8);
-  console.log(url);
-
   const [userid, setUserid] = useRecoilState(myuid);
-  const [username, setUsername] = useRecoilState(myname);
 
   useEffect(() => {
     async function fetchData() {
@@ -29,9 +21,7 @@ export default function BoardDetailPage() {
         const docRef = doc(getFirestore(firebaseApp), "board", `${url}`);
         const docSnap = await getDoc(docRef);
         setDocData(docSnap.data());
-      } catch (error) {
-        console.error(error);
-      }
+      } catch (error) {}
     }
     fetchData();
   }, [router]);

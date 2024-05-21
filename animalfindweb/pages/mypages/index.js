@@ -10,7 +10,6 @@ import {
   doc,
   getDocs,
   query,
-  orderBy,
   where,
   getDoc,
 } from "firebase/firestore/lite";

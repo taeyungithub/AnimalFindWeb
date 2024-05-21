@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import {
   collection,
   getFirestore,
-  doc,
   getDocs,
   query,
   orderBy,
@@ -15,18 +14,19 @@ import Searchbars01 from "../../src/searchbars/01/Searchbars01";
 export default function BoardsPage() {
   // 페이지 이동에 필요
   const router = useRouter();
-
+  // useState함수 쓰는법: const [A,B] = useState(초깃값) -> A로사용하고 B로 값을 바꿈
   // 데이터 가져오기
   const [docData, setDocData] = useState([]);
-
   // 검색 데이터
   const [searchResult, setSearchResult] = useState([]);
-
+  //useEffect함수 -> 페이지 띄우자마자 실행하게 하려고
   useEffect(() => {
     //firebase의 데이터 베이스에서 가져오기
     async function fetchData() {
       try {
+        // board라는 이름의 문서를 firestore에서 가져오기
         const board = collection(getFirestore(firebaseApp), "board");
+        // timestamp기준으로 내림차순
         const querySnapshot = await getDocs(
           query(board, orderBy("timestamp", "desc"))
         );
@@ -36,19 +36,18 @@ export default function BoardsPage() {
           newData.push(doc.data()); // 새로운 데이터를 배열에 추가
         });
         setDocData(newData); // 새로운 데이터로 상태 설정
-      } catch (error) {
-        console.error("Error fetching documents: ", error);
-      }
+      } catch (error) {}
     }
-    console.log(docData);
     fetchData();
   }, []);
 
-  //페이지 이동들
+  // 페이지 이동
   const onClickMoveToBoardDetail = (event) => {
+    //사진 클릭시 그 게시물의 상세페이지로 이동
     router.push(`/boards/${event.target.id}`);
   };
 
+  // return안에는 html 넣음
   return (
     <S.Wrapper>
       <S.TableTop />

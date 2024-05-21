@@ -1,10 +1,6 @@
 import { useState } from "react";
 import firebaseApp from "../../../src/firebase";
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
 
 import styled from "@emotion/styled";
