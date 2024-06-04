@@ -82,9 +82,10 @@ export default function BoardCommentList() {
                 <S.OptionWrapper>
                   <Otherprofile uid={message.userid} />
                   <S.DeleteIcon
-                    src="/images/option_update_icon.png/"
                     onClick={() => onClickDelete(message.userid, key)}
-                  />
+                  >
+                    X
+                  </S.DeleteIcon>
                 </S.OptionWrapper>
               </S.FlexWrapper>
               <S.profile>

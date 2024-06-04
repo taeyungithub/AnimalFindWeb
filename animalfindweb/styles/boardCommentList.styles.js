@@ -45,10 +45,11 @@ export const UpdateIcon = styled.img`
   height: 24px;
   cursor: pointer;
 `;
-export const DeleteIcon = styled.img`
-  margin-left: 30px;
+export const DeleteIcon = styled.button`
+  margin-left: 15px;
   width: 24px;
   height: 24px;
+  border-radius: 50%;
   cursor: pointer;
 `;
 
