@@ -1,4 +1,4 @@
-### Next.js + Firebase (동물분양사이트)
+### Node.js + Firebase (동물분양사이트)
 
 24.3.2 ~ 24.5.30
 
